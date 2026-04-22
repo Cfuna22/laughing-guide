@@ -40,6 +40,16 @@ pub async fn create_link(
     };
 
     pub async fn get_link_by_slug(pool: &pgPool, slug: &str) -> Result<Option<Link>, sqlx::Error> {
-        
+        let link = sqlx::query_as!(
+            Link,
+            "SELECT id, slug, original_url, clicks, created_at, updated_at FROM links WHERE slug = $1",
+            slug
+        )
+        .fetch_optional(pool)
+        .await?;
+
+        Ok(())
     }
+
+    
 }
