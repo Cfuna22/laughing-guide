@@ -39,5 +39,7 @@ pub async fn create_link(
         None => generate_unique_slug(pool).await,
     };
 
-    
+    pub async fn get_link_by_slug(pool: &pgPool, slug: &str) -> Result<Option<Link>, sqlx::Error> {
+        
+    }
 }
