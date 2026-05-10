@@ -61,4 +61,24 @@ pub async fn create_link(
     
         Ok((links))
     }
+
+    pub async fn update_link(
+        pool: &pgPool,
+        link_id:Uuid,
+        req: UpdateLinkRequest,
+    ) -> Result<Option<Link>, sqlx::Error> {
+        let current = sqlx::query_as!(
+            Link,
+            "SELECT id, slug, original_url, created_at, updated_at FROM links WHERE id = $1",
+            link_id
+        )
+        .fetch_optional(pool)
+        .await?;
+        
+        let mut current = match current {
+            Some(link) => link,
+            None => return Ok(None),
+        };
+        
+    }
 }
