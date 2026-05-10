@@ -89,7 +89,28 @@ pub async fn create_link(
                 .fetch_optional(pool)
                 .await?
                 .is_some();
+
+            if exists {
+                return Err(sqlx::Error::RowNotFound);
+            }
             current.slug = new_slug;
         }
+
+        let updated = sqlx::query_as!(
+            Link,
+            r#"UPDATE links SET slug = $1, original_url = $2, updated_at = NOW()
+            WHERE id = $3
+            RETURNING id, slug, original_url, clicks, created_at, updated_at
+            "#,
+            current.slug,
+            current.original_url,
+            link_id
+        )
+        .fetch_optional(pool)
+        .await?;
+        
+        Ok(updated)
     }
+
+    
 }
