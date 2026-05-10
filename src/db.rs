@@ -112,5 +112,11 @@ pub async fn create_link(
         Ok(updated)
     }
 
-    
+    pub async fn delete_link(pool: &pgPool, link_id: Uuid) -> Result<bool, sqlx::Error> {
+        let result = sqlx::query!("DELETE FROM links WHERE id = $1", link_id)
+            .execute(pool)
+            .await?;
+
+        Ok(result.rows_affected() > 0)
+    }
 }
