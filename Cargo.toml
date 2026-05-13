@@ -14,3 +14,4 @@ dotenvy = "0.15"
 anyhow = "1"
 nanoid = "0.5"  # For generating short codes
 tower-http = { version = "0.6", features = ["cors", "trace"] }
+
