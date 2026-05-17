@@ -12,7 +12,6 @@ dependencies = [
  "getrandom 0.3.4",
  "once_cell",
  "version_check",
-
  "zerocopy",
 ]
 
