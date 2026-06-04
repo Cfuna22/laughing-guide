@@ -119,4 +119,4 @@ pub async fn create_link(
 
         Ok(result.rows_affected() > 0)
     }
-
+}
