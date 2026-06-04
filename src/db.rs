@@ -51,7 +51,7 @@ pub async fn create_link(
         Ok(())
     }
 
-    pub async fn increment_link(pool: &pgPool, slug: &str) -> Result<Vec<Link>, sqlx::Error> {
+    pub async fn increment_link(pool: &pgPool, slug: &str) -> Result<Vec<Lnk>, sqlx::Error> {
         let links = sqlx::query_as!(
             Link,
             "SELECT id, slug, original_url, clicks, created_at, updated_at FROM links ORDER BY created_at DESC"
