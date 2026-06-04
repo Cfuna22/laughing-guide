@@ -56,7 +56,7 @@ pub async fn create_link(
             Link,
             "SELECT id, slug, original_url, clicks, created_at, updated_at FROM links ORDER BY created_at DESC"
         )
-        .fetch_all(pool
+        .fetch_all(pool)
         .await?;
     
         Ok((links))
