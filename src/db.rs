@@ -117,6 +117,6 @@ pub async fn create_link(
             .execute(pool)
             .await?;
 
-        Ok(result.rows_affectd() > 0)
+        Ok(result.rows_affected() > 0)
     }
 }
