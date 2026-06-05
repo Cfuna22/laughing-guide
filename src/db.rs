@@ -118,5 +118,5 @@ pub async fn create_link(
             .await?;
 
         Ok(result.rows_affected() > 0)
-    
+    }
 }
