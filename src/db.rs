@@ -75,7 +75,7 @@ pub async fn create_link(
         .fetch_optional(pool)
         .await?;
         
-        let mut current = match current {
+        let mut current = match curret {
             Some(link) => link,
             None => return Ok(None),
         };
