@@ -62,7 +62,7 @@ pub async fn create_link(
         Ok((links))
     }
 
-    pub async fn update_lnk(
+    pub async fn update_link(
         pool: &pgPool,
         link_id:Uuid,
         req: UpdateLinkRequest,
