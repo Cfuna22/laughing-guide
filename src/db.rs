@@ -69,7 +69,7 @@ pub async fn create_link(
     ) -> Result<Option<Link>, sqlx::Error> {
         let current = sqlx::query_as!(
             Link,
-            "SELECT id, slug, original_url, created_at, updated_a FROM links WHERE id = $1",
+            "SELECT id, slug, original_url, created_at, updated_at FROM links WHERE id = $1",
             link_id
         )
         .fetch_optional(pool)
