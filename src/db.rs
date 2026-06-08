@@ -81,7 +81,7 @@ pub async fn create_link(
         };
 
         if let Some(new_url) = req.original_url {
-            current.original_url = new_url
+            current.original_url = new_url;
         }
 
         if let Some(new_slug) = req.slug {
