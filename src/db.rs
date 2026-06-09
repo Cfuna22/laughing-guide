@@ -93,7 +93,7 @@ pub async fn create_link(
             if exists {
                 return Err(sqlx::Error::RowNotFound);
             }
-            current.slug = new_slu
+            current.slug = new_slug;
         }
 
         let updated = sqlx::query_as!(
