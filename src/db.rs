@@ -92,7 +92,7 @@ pub async fn create_link(
 
             if exists {
                 return Err(sqlx::Error::RowNotFound);
-            }
+            
             current.slug = new_slug;
         }
 
