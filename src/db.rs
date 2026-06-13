@@ -84,7 +84,7 @@ pub async fn create_link(
             current.original_url = new_url;
         }
 
-        if let Some(new_slug) = req.slug {
+        if let Some(new_slug) = req.slug 
             let exists = sqlx::query!("SELECT 1 FROM links WHERE slug = $1 AND id != $2", new_slug, link_id)
                 .fetch_optional(pool)
                 .await?
