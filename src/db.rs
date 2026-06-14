@@ -90,7 +90,7 @@ pub async fn create_link(
                 .await?
                 .is_some();
 
-            if exists {
+            if exists 
                 return Err(sqlx::Error::RowNotFound);
             }
             current.slug = new_slug;
