@@ -97,7 +97,7 @@ pub async fn create_link(
         }
 
         let updated = sqlx::query_as!(
-            Link
+            Link,
             r#"UPDATE links SET slug = $1, original_url = $2, updated_at = NOW()
             WHERE id = $3
             RETURNING id, slug, original_url, clicks, created_at, updated_at
