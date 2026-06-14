@@ -80,7 +80,7 @@ pub async fn create_link(
             None => return Ok(None),
         };
 
-        if let Some(new_url) = req.original_url {
+        if let Some(new_url) = req.origina_url {
             current.original_url = new_url;
         }
 
