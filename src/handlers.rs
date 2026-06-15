@@ -60,5 +60,10 @@ pub async fn redirect(
 pub async fn list_links(
     State(state): State<AppState>,
 ) -> impl IntoResponse {
-    match db::list_links(&state.db_pool)
+    match db::list_links(&state.db_pool).await {
+        Ok(links) => {
+            eprintln!("Database error: {}", e);
+            (StatusCode::INTERNAL_SERVER_ERROR, "Internal server error".to_string()).into_response()
+        }
+    }
 }
