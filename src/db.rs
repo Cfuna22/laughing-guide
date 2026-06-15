@@ -7,7 +7,7 @@ async fn generate_unique_slug(pool: &pgPool) -> String {
     loop {
         let slug = nanoid!(6);
 
-        let exists = sqlx::query("SELECT 1 FROM links WHERE slug = $1", slug)
+        let exists = sqlx::query!("SELECT 1 FROM links WHERE slug = $1", slug)
             .fetch_optional(pool)
             .await
             .unwrap()
@@ -39,6 +39,24 @@ pub async fn create_link(
         None => generate_unique_slug(pool).await,
     };
 
+    let link = sqlx::query_as!(
+        Link,
+        r#"
+        INSERT INTO links (id, slug, original_url, clicks)
+        VALUES ($1, $2, $3, 0)
+        RETURNING id, slug, original_url, clicks, created_at, updated_at
+        "#,
+        id,
+        slug,
+        req.original_url
+    )
+    .fetch_one(pool)
+    .await?;
+    
+    Ok(link)
+}
+
+
     pub async fn get_link_by_slug(pool: &pgPool, slug: &str) -> Result<Option<Link>, sqlx::Error> {
         let link = sqlx::query_as!(
             Link,
@@ -48,7 +66,7 @@ pub async fn create_link(
         .fetch_optional(pool)
         .await?;
 
-        Ok(())
+        Ok(link)
     }
 
     pub async fn increment_link(pool: &pgPool, slug: &str) -> Result<Vec<Link>, sqlx::Error> {
@@ -119,4 +137,3 @@ pub async fn create_link(
 
         Ok(result.rows_affected() > 0)
     }
-}
