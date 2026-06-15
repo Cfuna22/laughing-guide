@@ -35,3 +35,30 @@ pub async fn shorten_link(
         }
     }
 }
+
+pub async fn redirect(
+    State(state): State<AppState>,
+    Path(slug): Path<String>,
+) -> impl IntoResponse {
+    match db::get_link_by_slug(&state.db_pool, &slug).await {
+        Ok(Some(link)) => {
+            if let Err(e) = db::increment_clicks(&state.db_pool, &slug).await {
+                eprintln!("Failed to increment clicks: {}", e);
+            }
+            Redirect::temporary(&link.original_url).into_response()
+        }
+        Ok(none) => {
+            (StatusCode::NOT_FOUND, "Short link not found".to_string()).into_response()
+        }
+        Err(e) => {
+            eprintln!("Database error: {}", e);
+            (StatusCode::INTERNAL_SERVER_ERROR, "Internal server error".to_string()).into_response()
+        }
+    }
+}
+
+pub async fn list_links(
+    State(state): State<AppState>,
+) -> impl IntoResponse {
+    match db::list_links(&state.db_pool)
+}
