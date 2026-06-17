@@ -1,4 +1,4 @@
-use std::os::linux::raw::stat;
+use std::os::linux::raw::state;
 
 use axum::{
     extract::{Path, State, Json},
@@ -14,11 +14,11 @@ pub async fn shorten_link(
     State(state): State<AppState>,
     Json(payload): Json<CreateLinkRequest>,
 ) -> impl IntoResponse {
-    if !Payload.original_url.starts_with("http") {
+    if !payload.original_url.starts_with("http") {
         return (StatusCode::BAD_REQUEST, "Invalid URL format".to_string()).into_response();
     }
 
-    match db::create_link(&state.db_pool, Payload).await {
+    match db::create_link(&state.db_pool, payload).await {
         Ok(link) => {
             let short_url = format!("{}/{}", state.base_url, link.slug);
             let response = CreateLinkResponse {
@@ -107,7 +107,7 @@ pub async fn delete_link(
     State(state): State<AppState>,
     Path(link_id): Path<Uuid>,
 ) -> impl IntoResponse {
-    match db::delete_link(&stat.db_pool, link_id).await {
+    match db::delete_link(&state.db_pool, link_id).await {
         Ok(true) => StatusCode::NO_CONTENT.into_response(),
         Ok(false) => (StatusCode::NOT_FOUND, "Link not found".to_string()).into_response(),
         Err(e) => {
