@@ -22,7 +22,7 @@ async fn main() {
     // Load environment variables from .env file
     dotenv().ok();
     
-    // Set up loggin
+    // Set up logging
     tracing_subscriber::fmt::init();
     
     // Get database URL from environment
