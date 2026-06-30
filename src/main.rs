@@ -11,7 +11,7 @@ use dotenvy::dotenv;
 use std::env;
 use tower_http::trace::TraceLayer;
 
-#[derive(Clone)]
+#[derive(Clone)
 pub struct AppState {
     db_pool: PgPool,
     base_url: String,
