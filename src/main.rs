@@ -66,5 +66,5 @@ async fn main() {
     println!("URL Shortener running on http://localhost:3000");
     println!("Example: POST /shorten with {\"original_url\": \"https://example.com\"}");
     
-    axum::serve(listener, app).await.unwrap()
+    axum::serve(listener, app).await.unwrap();
 }
