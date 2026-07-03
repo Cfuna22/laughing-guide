@@ -31,7 +31,7 @@ async fn main() {
     // Create database connection pool
     let db_pool = PgPool::connect(&database_url)
         .await
-        .expect("Failed to connect to dataase");
+        .expect("Failed to connect to database");
     
     // Run migrations (if using sqlx migrate)
     // sqlx::migrate!().run(&db_pool).await.expect("Migration failed");
