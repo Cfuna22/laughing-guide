@@ -29,7 +29,7 @@ async fn main() {
     let base_url = env::var("BASE_URL").unwrap_or_else(|_| "http://localhost:3000".to_string());
     
     // Create database connection pool
-    let db_pool = PgPool::connect(&database_url)
+    let db_pool = PgPool::connect(&database_url=)
         .await
         .expect("Failed to connect to database");
     
