@@ -30,7 +30,7 @@ async fn main() {
     
     // Create database connection pool
     let db_pool = PgPool::connect(&database_url)
-        .await
+        .awai
         .expect("Failed to connect to database");
     
     // Run migrations (if using sqlx migrate)
