@@ -37,7 +37,7 @@ async fn main() {
     // sqlx::migrate!().run(&db_pool).await.expect("Migration failed");
     
     // Create shared state
-    let state = AppState 
+    let state = AppState {
         db_pool,
         base_url,
     };
