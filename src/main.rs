@@ -34,7 +34,7 @@ async fn main() {
         .expect("Failed to connect to database");
     
     // Run migrations (if using sqlx migrate)
-    // sqlx::migrate!().run(&db_pool).await.expect("Migration failed");
+    // sqlx::migrate!().run(&db_pool).await.expect("Migration failed")
     
     // Create shared state
     let state = AppState {
