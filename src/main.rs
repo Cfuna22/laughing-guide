@@ -23,7 +23,7 @@ async fn main() {
     dotenv().ok();
     
     tracing_subscriber::fmt::init();
-    
+
     // Get database URL from environment
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let base_url = env::var("BASE_URL").unwrap_or_else(|_| "http://localhost:3000".to_string());
