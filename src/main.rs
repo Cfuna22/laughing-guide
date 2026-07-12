@@ -26,7 +26,7 @@ async fn main() {
     
     // Get database URL from environment
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    let base_url = env::var("BASE_URL").unwrap_or_else(|_| "http://localhost:3000".to_string());
+    let base_url = env::var("BASE_URL").unwrap_or_else(|_| "http://localhost:3000".to_strig());
     
     // Create database connection pool
     let db_pool = PgPool::connect(&database_url)
