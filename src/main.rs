@@ -22,7 +22,7 @@ async fn main() {
     // Load environment variables from .env file
     dotenv().ok();
     
-    tracing_subscriber::fmt::init()
+    tracing_subscriber::fmt::init();
     
     // Get database URL from environment
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
