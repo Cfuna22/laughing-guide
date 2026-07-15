@@ -18,7 +18,7 @@ pub struct AppState {
 }
 
 #[tokio::main]
-async fn main( {
+async fn main() {
     // Load environment variables from .env file
     dotenv().ok();
     
