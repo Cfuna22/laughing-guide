@@ -14,7 +14,7 @@ use tower_http::trace::TraceLayer;
 #[derive(Clone)]
 pub struct AppState {
     db_pool: PgPool,
-    base_url: Strig,
+    base_url: String,
 }
 
 #[tokio::main]
